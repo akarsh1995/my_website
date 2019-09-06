@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.views import generic
+
+from blog.models import Article
 
 
 # Create your views here.
 
-def blog(request):
-    return render(request, 'blog/blog.html')
+class BlogListView(generic.ListView):
+    template_name = 'blog/blog.html'
+    model = Article
+    queryset = Article.objects.all()
+    paginate_by = 10
 
 
-def article(request):
-    return render(request, 'blog/article.html')
+class ArticleDetailView(generic.DetailView):
+    model = Article
+    template_name = 'blog/article.html'

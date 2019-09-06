@@ -134,3 +134,4 @@ IMPORTANT REGEX
 scratch
 .DS_Store
 .idea/
+/media/

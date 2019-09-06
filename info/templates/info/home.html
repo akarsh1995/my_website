@@ -1,6 +1,15 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% block header_content %}
+    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
 {% block content %}
 
     <!-- banner part start-->
@@ -10,7 +19,7 @@
                 <div class="col-lg-7">
                     <div class="banner_text">
                         <div class="banner_text_iner">
-                            <h5>Hi there, This is {{ personal_details.first_name }}</h5>
+                            <h5>Hi there, This is {{ profile.first_name }}</h5>
                             <h1>Data Scientist</h1>
                             <div class="banner_btn">
                                 <a href="#" class="btn_1">Contact me</a>
@@ -30,9 +39,9 @@
                 <div class="col-lg-6">
                     <div class="about_text">
                         <h4>about me</h4>
-                        <p>Good lights it very to above. Days image to sea. Over there seasons and spirit beast in. Greater bearing creepeth very behold fourth night morning seed moved.</p>
+                        <p>{{ profile.about_me }}</p>
                         <div class="experiance">
-                            <h2>07</h2>
+                            <h2>{{ profile.experience_years|stringformat:"02d" }}</h2>
                             <p>Years of <span>Experiences</span></p>
                         </div>
                     </div>
@@ -41,30 +50,12 @@
                     <div class="experiance_list">
                         <h4>Experiences</h4>
                         <div class="experiance_list_iner">
+                            {% for experience in profile.experiences.all %}
                             <div class="single_experiance_list">
-                                <h5>Product designer</h5>
-                                <p>at apple from 2011 to present</p>
+                                <h5>{{ experience.designation }}</h5>
+                                <p>at {{ experience.company }} from {{ experience.from_date |date:"M' y" }} to {{ experience.to_date| date:"M' y" }}</p>
                             </div>
-                            <div class="single_experiance_list">
-                                <h5>UI designer </h5>
-                                <p>at theme from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>Print designert</h5>
-                                <p>at envato from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>Product designer</h5>
-                                <p>at apple from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>UI designer </h5>
-                                <p>at theme from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>Print designert</h5>
-                                <p>at envato from 2011 to present</p>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -92,39 +83,39 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="mesonary_part">
-                        <div class="grid">
-                            <div class="grid-sizer"></div>
-                            <a href="{% url 'project-details-url' %}" class="grid-item">
-                                <img src="{% static 'img/port_1.png' %}" alt="">
-                                <div class="portfolio_hover_text">
-                                    <i class="ti-plus"></i>
-                                </div>
-                            </a>
-                            <a href="{% url 'project-details-url' %}" class="grid-item big_height big_weight">
-                                <img src="{% static 'img/port_2.png' %}" alt="">
-                                <div class="portfolio_hover_text">
-                                    <i class="ti-plus"></i>
-                                </div>
-                            </a>
-                            <a href="{% url 'project-details-url' %}" class="grid-item">
-                                <img src="{% static 'img/port_3.png' %}" alt="">
-                                <div class="portfolio_hover_text">
-                                    <i class="ti-plus"></i>
-                                </div>
-                            </a>
-                            <a href="{% url 'project-details-url' %}" class="grid-item big_weight">
-                                <img src="{% static 'img/port_4.png' %}" alt="">
-                                <div class="portfolio_hover_text">
-                                    <i class="ti-plus"></i>
-                                </div>
-                            </a>
-                            <a href="{% url 'project-details-url' %}" class="grid-item">
-                                <img src="{% static 'img/port_5.png' %}" alt="">
-                                <div class="portfolio_hover_text">
-                                    <i class="ti-plus"></i>
-                                </div>
-                            </a>
-                        </div>
+{#                        <div class="grid">#}
+{#                            <div class="grid-sizer"></div>#}
+{#                            <a href="{% url 'project-details-url' %}" class="grid-item">#}
+{#                                <img src="{% static 'img/port_1.png' %}" alt="">#}
+{#                                <div class="portfolio_hover_text">#}
+{#                                    <i class="ti-plus"></i>#}
+{#                                </div>#}
+{#                            </a>#}
+{#                            <a href="{% url 'project-details-url' %}" class="grid-item big_height big_weight">#}
+{#                                <img src="{% static 'img/port_2.png' %}" alt="">#}
+{#                                <div class="portfolio_hover_text">#}
+{#                                    <i class="ti-plus"></i>#}
+{#                                </div>#}
+{#                            </a>#}
+{#                            <a href="{% url 'project-details-url' %}" class="grid-item">#}
+{#                                <img src="{% static 'img/port_3.png' %}" alt="">#}
+{#                                <div class="portfolio_hover_text">#}
+{#                                    <i class="ti-plus"></i>#}
+{#                                </div>#}
+{#                            </a>#}
+{#                            <a href="{% url 'project-details-url' %}" class="grid-item big_weight">#}
+{#                                <img src="{% static 'img/port_4.png' %}" alt="">#}
+{#                                <div class="portfolio_hover_text">#}
+{#                                    <i class="ti-plus"></i>#}
+{#                                </div>#}
+{#                            </a>#}
+{#                            <a href="{% url 'project-details-url' %}" class="grid-item">#}
+{#                                <img src="{% static 'img/port_5.png' %}" alt="">#}
+{#                                <div class="portfolio_hover_text">#}
+{#                                    <i class="ti-plus"></i>#}
+{#                                </div>#}
+{#                            </a>#}
+{#                        </div>#}
                     </div>
                 </div>
             </div>

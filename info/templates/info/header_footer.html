@@ -7,7 +7,18 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Gilb - Resume Template By Colorlib</title>
+
+
+    {% block header_content %}
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Free Web tutorials">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+        <meta name="author" content="John Doe">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+
+
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -54,7 +65,6 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{% url 'blog_url' %}"> blog</a>
-                                        <a class="dropdown-item" href="{% url 'single_article_url' %}">Single blog</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -64,8 +74,8 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                         <a class="dropdown-item" href="{% url 'about_url' %}"> about</a>
-                                        <a class="dropdown-item" href="{% url 'projects-url' %}">portfolio</a>
-                                        <a class="dropdown-item" href="{% url 'project-details-url' %}">portfolio details</a>
+                                        <a class="dropdown-item" href="{% url 'projects-url' %}">Projects</a>
+{#                                        <a class="dropdown-item" href="{% url 'project-details-url' %}">Project details</a>#}
                                         <a class="dropdown-item" href="elements.html">Elements</a>
                                     </div>
                                 </li>
@@ -75,9 +85,9 @@
                             </ul>
                         </div>
                         <div class="social_icon">
-                            <a href="#"><i class="fab fa-facebook-square"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
                             <a href="#"><i class="fas fa-globe"></i></a>
                         </div>
                     </nav>
@@ -112,9 +122,9 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="social_icon">
-                        <a href="#"><i class="fab fa-facebook-square"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
                         <a href="#"><i class="fas fa-globe"></i></a>
                     </div>
                 </div>

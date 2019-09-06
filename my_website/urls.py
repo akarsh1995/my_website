@@ -15,17 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from blog.views import blog, article
+from blog.views import BlogListView, ArticleDetailView
 from info.views import ContactPageView, about, HomePageView
 from projects.views import project_details, projects
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', blog, name='blog_url'),
+    path('blog/', BlogListView.as_view(), name='blog_url'),
     path('contact/', ContactPageView.as_view(), name='contact_url'),
     path('about/', about, name='about_url'),
     path('', HomePageView.as_view(), name='home_url'),
-    path('article/', article, name='single_article_url'),
-    path('portfolio/', projects, name='projects-url'),
-    path('project/', project_details, name='project-details-url')
-]
+    path('article/<int:pk>', ArticleDetailView.as_view(), name='single_article_url'),
+    path('projects/', projects, name='projects-url'),
+    path('project_details/<int:pk>', project_details, name='project-details-url'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
