@@ -21,6 +21,9 @@ class Profile(models.Model):
     stack_overflow = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
 
+    def __str__(self):
+        return self.user
+
 
 class Experience(models.Model):
     profile = models.ForeignKey(Profile,
@@ -32,3 +35,6 @@ class Experience(models.Model):
 
     class Meta:
         verbose_name_plural = 'Experiences'
+
+    def __str__(self):
+        return "{}@{}".format(self.designation, self.company)

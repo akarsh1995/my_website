@@ -14,12 +14,18 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
 
+    def __str__(self):
+        return self.name
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True)
 
     class Meta:
         verbose_name_plural = "Tags"
+
+    def __str__(self):
+        return self.name
 
 
 class Article(models.Model):

@@ -8,6 +8,9 @@ class Contributor(models.Model):
     name = models.CharField(max_length=25)
     linkedin = models.URLField()
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
     creator = models.ForeignKey(User, related_name='projects', on_delete=models.CASCADE)
@@ -23,6 +26,9 @@ class Project(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        if self.description:
+            text_p_wrapped = [f'<p>{line.strip()}</p>' for line in self.description.split('\n')]
+            self.description = ''.join(text_p_wrapped)
         if not self.slug:
             self.slug = slugify(self.title)
         super(Project, self).save()
@@ -32,3 +38,6 @@ class Project(models.Model):
 
     def get_absolute_url(self):
         return reverse('project-details-url', kwargs={'slug': self.slug})
+
+    def __str__(self):
+        return self.title

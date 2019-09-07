@@ -7,17 +7,24 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    {% if meta %}
+        {% if meta.title %}
+            <title>{{ meta.title }}</title>
+        {% endif %}
+        {% if meta.description %}
+            <meta name="description" content="{{ meta.description }}">
+        {% endif %}
+        {% if meta.keywords %}
+            <meta name="keywords" content="{{ meta.keywords }}">
+        {% endif %}
+        {% if meta.author %}
+            <meta name="author" content="{{ meta.author }}">
+        {% endif %}
+    {% endif %}
 
     {% block header_content %}
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="description" content="Free Web tutorials">
-        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-        <meta name="author" content="John Doe">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% endblock %}
 
+    {% endblock %}
 
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <!-- Bootstrap CSS -->
@@ -40,124 +47,127 @@
 </head>
 
 <body>
-    <!--::header part start::-->
-    <header class="main_menu home_menu">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="{% url 'home_url' %}"> <img src="{% static 'img/logo.png' %}" alt="logo"> </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+<!--::header part start::-->
+<header class="main_menu home_menu">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="{% url 'home_url' %}"> <img src="{% static 'img/logo.png' %}"
+                                                                              alt="logo"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="menu_icon"><i class="ti-menu"></i></span>
-                        </button>
+                        <span class="menu_icon"><i class="ti-menu"></i></span>
+                    </button>
 
-                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'home_url' %}">Home</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="{% url 'blog_url' %}" id="navbarDropdown"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Blog
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{% url 'blog_url' %}"> blog</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="{% url 'blog_url' %}" id="navbarDropdown_1"
-                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        pages
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                        <a class="dropdown-item" href="{% url 'about_url' %}"> about</a>
-                                        <a class="dropdown-item" href="{% url 'projects-url' %}">Projects</a>
-{#                                        <a class="dropdown-item" href="{% url 'project-details-url' %}">Project details</a>#}
-                                        <a class="dropdown-item" href="elements.html">Elements</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'contact_url' %}">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="social_icon">
-                            <a href="{{ social_links.github|safe }}"><i class="fab fa-github"></i></a>
-                            <a href="{{ social_links.so|safe }}"><i class="fab fa-stack-overflow"></i></a>
-                            <a href="{{ social_links.linkedin|safe }}"><i class="fab fa-linkedin"></i></a>
-                            <a href="{{ social_links.fb|safe }}"><i class="fab fa-facebook"></i></a>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header part end-->
-    {% block content %}
-    {% endblock %}
-    <!-- footer css start -->
-    <footer class="footer_Part padding_top">
-        <div class="container">
-            <div class="row alingn-item-center">
-                <div class="col-lg-6">
-                    <div class="footer_text">
-                        <span>Discuss your project now</span>
-                        <h2>example@gilb.com </h2>
+                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home_url' %}">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'blog_url' %}" id="navbarDropdown"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Blog
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'blog_url' %}"> blog</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'blog_url' %}" id="navbarDropdown_1"
+                                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    pages
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="{% url 'about_url' %}"> about</a>
+                                    <a class="dropdown-item" href="{% url 'projects-url' %}">Projects</a>
+                                    {#                                        <a class="dropdown-item" href="{% url 'project-details-url' %}">Project details</a>#}
+                                    <a class="dropdown-item" href="elements.html">Elements</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contact_url' %}">Contact</a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer_btn">
-                        <a href="#" class="btn_1">Download CV</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer_menu">
-                        <a href="#">About</a>
-                        <a href="#">WORK</a>
-                        <a href="#">Contact</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
                     <div class="social_icon">
                         <a href="{{ social_links.github|safe }}"><i class="fab fa-github"></i></a>
                         <a href="{{ social_links.so|safe }}"><i class="fab fa-stack-overflow"></i></a>
                         <a href="{{ social_links.linkedin|safe }}"><i class="fab fa-linkedin"></i></a>
                         <a href="{{ social_links.fb|safe }}"><i class="fab fa-facebook"></i></a>
                     </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header part end-->
+{% block content %}
+{% endblock %}
+<!-- footer css start -->
+<footer class="footer_Part padding_top">
+    <div class="container">
+        <div class="row alingn-item-center">
+            <div class="col-lg-6">
+                <div class="footer_text">
+                    <span>Discuss your project now</span>
+                    <h2>example@gilb.com </h2>
                 </div>
-                <div class="col-lg-12">
-                        <div class="copyright_part text-center">
-                            <p class="footer-text m-0">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer_btn">
+                    <a href="#" class="btn_1">Download CV</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="footer_menu">
+                    <a href="#">About</a>
+                    <a href="#">WORK</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="social_icon">
+                    <a href="{{ social_links.github|safe }}"><i class="fab fa-github"></i></a>
+                    <a href="{{ social_links.so|safe }}"><i class="fab fa-stack-overflow"></i></a>
+                    <a href="{{ social_links.linkedin|safe }}"><i class="fab fa-linkedin"></i></a>
+                    <a href="{{ social_links.fb|safe }}"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="copyright_part text-center">
+                    <p class="footer-text m-0">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+                        All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by
+                        <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- footer css end -->
+    </div>
+</footer>
+<!-- footer css end -->
 
-    <!-- jquery plugins here-->
-    <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
-    <!-- popper js -->
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <!-- bootstrap js -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- easing js -->
-    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
-    <!-- masonry js -->
-    <script src="{% static 'js/masonry.pkgd.js' %}"></script>
-    <!-- particles js -->
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<!-- jquery plugins here-->
+<script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+<!-- popper js -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- bootstrap js -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- easing js -->
+<script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+<!-- masonry js -->
+<script src="{% static 'js/masonry.pkgd.js' %}"></script>
+<!-- particles js -->
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
 
-    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
-    <!-- custom js -->
-    <script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<!-- custom js -->
+<script src="{% static 'js/custom.js' %}"></script>
 </body>
 
 </html>
