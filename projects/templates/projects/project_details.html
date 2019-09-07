@@ -24,18 +24,18 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-5 col-md-6">
                     <div class="philophy_img">
-                        <img src="{% static 'img/project_details.png' %}" alt="#">
+                        <img src="{{ project.display_image.url }}" alt="#">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="philophy_text">
-                        <h2>I help you to make digital art and illustration</h2>
-                        <p>There winged grass midst moving earth seed herb fifth you multiply you divide cattle stars first cattle was had spirit you're thing, night darkness. Which itself stars creature.</p>
+                        <h2><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h2>
+                        <p>{{ project.description }}</p>
                         <ul>
-                            <li><a href="#">Web hero image</a></li>
-                            <li><a href="#">Illustration for web</a></li>
-                            <li><a href="#">Isomettric</a></li>
-                            <li><a href="#">Flat illustration</a></li>
+                            <li><a href="#">{{ project.start_date }}</a></li>
+                            <li><a href="#">{{ project.end_date }}</a></li>
+                            <li><a href="#">{{ project.contributors }}</a></li>
+{#                            <li><a href="#">Flat illustration</a></li>#}
                         </ul>
                     </div>
                 </div>
@@ -44,50 +44,50 @@
     </section>
     <!-- philosophy part end -->
 
-    <!-- related project part start -->
-    <section class="related_project padding_bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="section_tittle">
-                        <h2>Related work</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_project_details">
-                        <a href="{% static 'img/port_1.png' %}" class="grid-item img_gallery">
-                            <img src="{% static 'img/port_1.png' %}" alt="">
-                            <div class="portfolio_hover_text">
-                                <i class="ti-plus"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_project_details">
-                        <a href="{% static 'img/port_2.png' %}" class="grid-item img_gallery">
-                            <img src="{% static 'img/port_2.png' %}" alt="">
-                            <div class="portfolio_hover_text">
-                                <i class="ti-plus"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="single_project_details">
-                        <a href="{% static 'img/port_3.png' %}" class="grid-item img_gallery">
-                            <img src="{% static 'img/port_3.png' %}" alt="">
-                            <div class="portfolio_hover_text">
-                                <i class="ti-plus"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- related project part end -->
+{#    <!-- related project part start -->#}
+{#    <section class="related_project padding_bottom">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-6">#}
+{#                    <div class="section_tittle">#}
+{#                        <h2>Related work</h2>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row justify-content-center">#}
+{#                <div class="col-lg-4 col-sm-6">#}
+{#                    <div class="single_project_details">#}
+{#                        <a href="{% static 'img/port_1.png' %}" class="grid-item img_gallery">#}
+{#                            <img src="{% static 'img/port_1.png' %}" alt="">#}
+{#                            <div class="portfolio_hover_text">#}
+{#                                <i class="ti-plus"></i>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-4 col-sm-6">#}
+{#                    <div class="single_project_details">#}
+{#                        <a href="{% static 'img/port_2.png' %}" class="grid-item img_gallery">#}
+{#                            <img src="{% static 'img/port_2.png' %}" alt="">#}
+{#                            <div class="portfolio_hover_text">#}
+{#                                <i class="ti-plus"></i>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-lg-4 col-sm-6">#}
+{#                    <div class="single_project_details">#}
+{#                        <a href="{% static 'img/port_3.png' %}" class="grid-item img_gallery">#}
+{#                            <img src="{% static 'img/port_3.png' %}" alt="">#}
+{#                            <div class="portfolio_hover_text">#}
+{#                                <i class="ti-plus"></i>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+{#    <!-- related project part end -->#}
 
 {% endblock %}

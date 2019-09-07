@@ -51,4 +51,4 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('single_article_url', kwargs={'pk': self.pk})
+        return reverse('single_article_url', kwargs={'slug': self.slug})
