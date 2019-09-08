@@ -22,7 +22,7 @@ class Profile(models.Model):
     facebook = models.URLField(blank=True)
 
     def __str__(self):
-        return self.user
+        return self.user.first_name
 
 
 class Experience(models.Model):
@@ -38,3 +38,38 @@ class Experience(models.Model):
 
     def __str__(self):
         return "{}@{}".format(self.designation, self.company)
+
+
+class Client(models.Model):
+    profile = models.ForeignKey(Profile, related_name='clients', on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    designation = models.CharField(max_length=50)
+    recommendation = models.TextField()
+    image = models.ImageField(blank=True)
+    linkedin = models.URLField(blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Clients'
+
+    def __str__(self):
+        return f'{self.profile}_{self.name}'
+
+
+class Philosophy(models.Model):
+    profile = models.OneToOneField(Profile, related_name='philosophy', on_delete=models.CASCADE)
+    title = models.CharField(max_length=150, blank=True)
+    description = models.TextField(blank=True)
+    image = models.ImageField(blank=True, null=True)
+
+    def __str__(self):
+        return f'Philosophy {self.profile}'
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.description:
+            text_p_wrapped = [f'<p>{line.strip()}</p>' for line in self.description.split('\n') if line]
+            self.description = ''.join(text_p_wrapped)
+        super(Philosophy, self).save()
+
+    class Meta:
+        verbose_name_plural = 'philosophies'

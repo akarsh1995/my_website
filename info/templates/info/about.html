@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block header_content %}
-        <title>About Page</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="Free Web tutorials">
-        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-        <meta name="author" content="John Doe">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 
@@ -29,53 +29,7 @@
     <!-- banner part start-->
 
     <!-- about part start-->
-    <section class="about_part section_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="about_text">
-                        <h4>about me</h4>
-                        <p>Good lights it very to above. Days image to sea. Over there seasons and spirit beast in. Greater bearing creepeth very behold fourth night morning seed moved.</p>
-                        <div class="experiance">
-                            <h2>07</h2>
-                            <p>Years of <span>Experiences</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="experiance_list">
-                        <h4>Experiences</h4>
-                        <div class="experiance_list_iner">
-                            <div class="single_experiance_list">
-                                <h5>Product designer</h5>
-                                <p>at apple from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>UI designer </h5>
-                                <p>at theme from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>Print designert</h5>
-                                <p>at envato from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>Product designer</h5>
-                                <p>at apple from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>UI designer </h5>
-                                <p>at theme from 2011 to present</p>
-                            </div>
-                            <div class="single_experiance_list">
-                                <h5>Print designert</h5>
-                                <p>at envato from 2011 to present</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include 'info/about_section.html' %}
     <!-- about part end-->
 
     <!-- philosophy part css start -->
@@ -85,22 +39,21 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="philophy_text">
                         <h5>My philosophy</h5>
-                        <h2>Always work harder and create
-                            awesome products</h2>
-                        <p>Good lights it very to above. Days image to sea. Over there seasons and spirit beast in. Greater bearing creepeth very behold fourth night morning seed moved.</p>
-                        <p>Good lights it very to above. Days image to sea. Over there seasons and spirit beast in. Greater bearing creepeth very behold fourth night morning seed moved.</p>
-                        <p>Good lights it very to above. Days image to sea. Over there seasons and spirit beast in. Greater bearing creepeth very behold fourth night morning seed moved.
-                        </p>
+                        <h2>{{ profile.philosophy.title|safe }}</h2>
+                        {{ profile.philosophy.description|safe }}
                     </div>
                 </div>
-                <div class="col-lg-5 col-md-6">
-                    <div class="philophy_img">
-                        <img src="{% static 'img/philosophy.png' %}" alt="#">
+                {% if profile.philosophy.image %}
+                    <div class="col-lg-5 col-md-6">
+                        <div class="philophy_img">
+                            <img src="{{ profile.philosophy.image.url }}" alt="#">
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </section>
     <!-- philosophy part css end -->
     <!--================Blog Area =================-->
 {% endblock %}
+

@@ -1,0 +1,30 @@
+<section class="about_part section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about_text">
+                        <h4>about me</h4>
+                        <p>{{ profile.about_me }}</p>
+                        <div class="experiance">
+                            <h2>{{ profile.experience_years|stringformat:"02d" }}</h2>
+                            <p>Years of <span>Experiences</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="experiance_list">
+                        <h4>Experiences</h4>
+                        <div class="experiance_list_iner">
+                            {% for experience in profile.experiences.all %}
+                                <div class="single_experiance_list">
+                                    <h5>{{ experience.designation }}</h5>
+                                    <p>at {{ experience.company }} from {{ experience.from_date |date:"M' y" }}
+                                        to {{ experience.to_date| date:"M' y" }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

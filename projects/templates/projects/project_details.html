@@ -33,13 +33,18 @@
                         <strong>{{ project.start_date|date:"M' y" }} - {{ project.end_date|date:"M' y" }}</strong>
                         <div style="text-align: justify">{{ project.description|safe }}</div>
                         <ul>
-                            {% if project.contributors %}
-                                <li><a href="#">{{ project.contributors }}</a></li>
+                            {% if project.url %}
+                                <li>See project on <a style="color: blue" href="{{ project.url }}"><i
+                                        class="fab fa-github"></i> Github</a></li>
                             {% endif %}
-                        {% if project.url %}
-                            <li>See project on <a style="color: blue" href="{{ project.url }}"><i class="fab fa-github"></i> Github</a></li>
-                        {% endif %}
-{#                            <li><a href="#">Flat illustration</a></li>#}
+                            {% if project.contributors.all %}
+                                <li>Contributors:
+                                {% for contributor in project.contributors.all %}
+                                    {{ contributor.name }} <a href="{{ contributor.linkedin }}"><i class="fab fa-linkedin"></i></a>
+                                {% endfor %}
+                                </li>
+                            {% endif %}
+                            {#                            <li><a href="#">Flat illustration</a></li>#}
                         </ul>
                     </div>
                 </div>
@@ -48,50 +53,50 @@
     </section>
     <!-- philosophy part end -->
 
-{#    <!-- related project part start -->#}
-{#    <section class="related_project padding_bottom">#}
-{#        <div class="container">#}
-{#            <div class="row">#}
-{#                <div class="col-lg-6">#}
-{#                    <div class="section_tittle">#}
-{#                        <h2>Related work</h2>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="row justify-content-center">#}
-{#                <div class="col-lg-4 col-sm-6">#}
-{#                    <div class="single_project_details">#}
-{#                        <a href="{% static 'img/port_1.png' %}" class="grid-item img_gallery">#}
-{#                            <img src="{% static 'img/port_1.png' %}" alt="">#}
-{#                            <div class="portfolio_hover_text">#}
-{#                                <i class="ti-plus"></i>#}
-{#                            </div>#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-lg-4 col-sm-6">#}
-{#                    <div class="single_project_details">#}
-{#                        <a href="{% static 'img/port_2.png' %}" class="grid-item img_gallery">#}
-{#                            <img src="{% static 'img/port_2.png' %}" alt="">#}
-{#                            <div class="portfolio_hover_text">#}
-{#                                <i class="ti-plus"></i>#}
-{#                            </div>#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-lg-4 col-sm-6">#}
-{#                    <div class="single_project_details">#}
-{#                        <a href="{% static 'img/port_3.png' %}" class="grid-item img_gallery">#}
-{#                            <img src="{% static 'img/port_3.png' %}" alt="">#}
-{#                            <div class="portfolio_hover_text">#}
-{#                                <i class="ti-plus"></i>#}
-{#                            </div>#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </section>#}
-{#    <!-- related project part end -->#}
+    {#    <!-- related project part start -->#}
+    {#    <section class="related_project padding_bottom">#}
+    {#        <div class="container">#}
+    {#            <div class="row">#}
+    {#                <div class="col-lg-6">#}
+    {#                    <div class="section_tittle">#}
+    {#                        <h2>Related work</h2>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#            <div class="row justify-content-center">#}
+    {#                <div class="col-lg-4 col-sm-6">#}
+    {#                    <div class="single_project_details">#}
+    {#                        <a href="{% static 'img/port_1.png' %}" class="grid-item img_gallery">#}
+    {#                            <img src="{% static 'img/port_1.png' %}" alt="">#}
+    {#                            <div class="portfolio_hover_text">#}
+    {#                                <i class="ti-plus"></i>#}
+    {#                            </div>#}
+    {#                        </a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="col-lg-4 col-sm-6">#}
+    {#                    <div class="single_project_details">#}
+    {#                        <a href="{% static 'img/port_2.png' %}" class="grid-item img_gallery">#}
+    {#                            <img src="{% static 'img/port_2.png' %}" alt="">#}
+    {#                            <div class="portfolio_hover_text">#}
+    {#                                <i class="ti-plus"></i>#}
+    {#                            </div>#}
+    {#                        </a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="col-lg-4 col-sm-6">#}
+    {#                    <div class="single_project_details">#}
+    {#                        <a href="{% static 'img/port_3.png' %}" class="grid-item img_gallery">#}
+    {#                            <img src="{% static 'img/port_3.png' %}" alt="">#}
+    {#                            <div class="portfolio_hover_text">#}
+    {#                                <i class="ti-plus"></i>#}
+    {#                            </div>#}
+    {#                        </a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </section>#}
+    {#    <!-- related project part end -->#}
 
 {% endblock %}
