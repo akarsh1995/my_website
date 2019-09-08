@@ -20,6 +20,7 @@ class Profile(models.Model):
     github = models.URLField(blank=True)
     stack_overflow = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
+    photo = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.user.first_name
@@ -73,3 +74,13 @@ class Philosophy(models.Model):
 
     class Meta:
         verbose_name_plural = 'philosophies'
+
+
+class GetInTouch(models.Model):
+    name = models.CharField(max_length=35, null=True, blank=True)
+    message = models.TextField(max_length=500, null=True, blank=True)
+    email = models.EmailField(max_length=30, null=True, blank=True)
+    subject = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return f'Message from {self.email}'

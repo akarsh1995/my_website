@@ -1,13 +1,14 @@
-from info.views import get_profile
+from django.conf import settings
+
+from info.models import Profile
 
 
-def social_links(request):
+def get_profile():
+    return Profile.objects.get(user__username=settings.USER_NAME)
+
+
+def profile(request):
     p = get_profile()
     return {
-        'social_links': {
-            'linkedin': p.linkedin,
-            'so': p.stack_overflow,
-            'github': p.github,
-            'fb': p.facebook
-        }
+        'profile': p
     }
