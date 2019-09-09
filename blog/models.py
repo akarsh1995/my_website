@@ -1,7 +1,4 @@
 import mimetypes
-from urllib.request import urlopen
-
-from django.conf import settings
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.db import models
@@ -34,8 +31,9 @@ class Article(models.Model):
     title = models.CharField(max_length=64, unique=True)
     tags = models.ManyToManyField(Tag, blank=True)
     background_image = models.ImageField(upload_to='post/%Y/%m/%d')
-    slug = models.SlugField(max_length=128, blank=True)
+    slug = models.SlugField(max_length=38, blank=True)
     content = models.TextField()
+    short_description = models.CharField(max_length=150, blank=True, null=True)
     updated_on = models.DateField(auto_now=True)
     created_on = models.DateField(auto_now_add=True)
     publish_on = models.DateField()
@@ -50,7 +48,12 @@ class Article(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if not self.slug:
-            self.slug = self.get_slug()
+            self.slug = slugify(self.title)
+        self.slug = self.slug[:38] if len(self.slug) > 38 else self.slug
+        if len(self.content) > 140:
+            self.short_description = self.content[:140] + '...'
+        else:
+            self.short_description = self.content + "..."
         super(Article, self).save()
 
     def __str__(self):

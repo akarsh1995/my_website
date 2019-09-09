@@ -21,6 +21,7 @@ class Profile(models.Model):
     stack_overflow = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
     photo = models.ImageField(blank=True, null=True)
+    cv = models.FileField(upload_to='resume/', null=True, blank=True)
 
     def __str__(self):
         return self.user.first_name

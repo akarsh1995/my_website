@@ -9,7 +9,7 @@ class Project(models.Model):
     title = models.CharField(max_length=150, blank=True)
     start_date = models.DateField(blank=True)
     end_date = models.DateField(blank=True, help_text='If currently working leave as it is')
-    url = models.URLField()
+    url = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True)
     currently_working = models.BooleanField()
     slug = models.CharField(max_length=100, blank=True)
@@ -18,7 +18,7 @@ class Project(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if self.description:
-            text_p_wrapped = [f'<p>{line.strip()}</p>' for line in self.description.split('\n') if line]
+            text_p_wrapped = [f'<p>{line.strip()}</p>' for line in self.description.split('\n') if line and not line.startswith('<')]
             self.description = ''.join(text_p_wrapped)
         if not self.slug:
             self.slug = slugify(self.title)

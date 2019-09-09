@@ -29,7 +29,7 @@
 
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ article.background_image.url }}" alt="">
+                                <img class="card-img rounded-0" src="{{ article.background_image.url }}" alt="" height="375">
                                 <a href="#" class="blog_item_date">
                                     <h3>{{ article.publish_on.day|stringformat:"02d" }}</h3>
                                     <p>{{ article.publish_on|date:"M" }}</p>
@@ -40,7 +40,7 @@
                                 <a class="d-inline-block" href="{{ article.get_absolute_url }}">
                                     <h2>{{ article.title | safe }}</h2>
                                 </a>
-                                <p>{{ article.content | safe }}</p>
+                                <p>{{ article.short_description | safe }}</p>
                                 <ul class="blog-info-link">
                                     <li><a href="#"><i class="far fa-user"></i> {{ article.tags.name }}</a></li>
 {#                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>#}

@@ -17,3 +17,5 @@ class ArticleDetailView(generic.DetailView):
     model = Article
     template_name = 'blog/article.html'
     context_object_name = 'article'
+    queryset = Article.objects.all()
+
