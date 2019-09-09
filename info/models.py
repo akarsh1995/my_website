@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     about_me = models.TextField(max_length=300)
     country_code = models.CharField(max_length=4, choices=COUNTRY_CODES, blank=True)
-    phone = models.IntegerField(blank=True)
+    phone = models.CharField(max_length=15, blank=True, null=True)
     phone_timings = models.CharField(max_length=50)
     city = models.CharField(max_length=30, blank=True)
     street = models.CharField(max_length=40, blank=True)
@@ -20,7 +20,7 @@ class Profile(models.Model):
     github = models.URLField(blank=True)
     stack_overflow = models.URLField(blank=True)
     facebook = models.URLField(blank=True)
-    photo = models.ImageField(blank=True, null=True)
+    photo = models.ImageField(blank=True, null=True, upload_to='profile/')
     cv = models.FileField(upload_to='resume/', null=True, blank=True)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Client(models.Model):
     name = models.CharField(max_length=50)
     designation = models.CharField(max_length=50)
     recommendation = models.TextField()
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, upload_to='clients/')
     linkedin = models.URLField(blank=True)
 
     class Meta:
@@ -61,7 +61,7 @@ class Philosophy(models.Model):
     profile = models.OneToOneField(Profile, related_name='philosophy', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True, upload_to='philosophy/')
 
     def __str__(self):
         return f'Philosophy {self.profile}'

@@ -13,7 +13,7 @@ class Project(models.Model):
     description = models.TextField(blank=True)
     currently_working = models.BooleanField()
     slug = models.CharField(max_length=100, blank=True)
-    display_image = models.ImageField(blank=True)
+    display_image = models.ImageField(blank=True, upload_to='projects/')
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
