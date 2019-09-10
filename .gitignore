@@ -136,3 +136,4 @@ scratch
 .idea/
 /media/
 /start.sh
+/.env_prod
