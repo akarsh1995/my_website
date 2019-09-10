@@ -24,7 +24,7 @@ class Profile(models.Model):
     cv = models.FileField(upload_to='resume/', null=True, blank=True)
 
     def __str__(self):
-        return self.user.first_name
+        return str(self.user)
 
 
 class Experience(models.Model):
