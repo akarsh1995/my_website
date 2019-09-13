@@ -1,8 +1,9 @@
-import mimetypes
-from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
+
+from .mixins import CropShrinkImageMixin
 
 
 class Category(models.Model):
@@ -25,7 +26,7 @@ class Tag(models.Model):
         return self.name
 
 
-class Article(models.Model):
+class Article(CropShrinkImageMixin, models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=64, unique=True)
@@ -47,6 +48,7 @@ class Article(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        self.crop_image('background_image', (750, 375))
         if not self.slug:
             self.slug = slugify(self.title)
         self.slug = self.slug[:38] if len(self.slug) > 38 else self.slug
