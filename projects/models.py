@@ -4,13 +4,15 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 from info.mixins import PTagWrapMixin
+from blog.models import Category
 
 
 class Project(PTagWrapMixin, models.Model):
     creator = models.ForeignKey(User, related_name='projects', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
+    category = models.ForeignKey(Category, blank=True, null=True, related_name='projects', on_delete=models.PROTECT)
     start_date = models.DateField(blank=True)
-    end_date = models.DateField(blank=True, help_text='If currently working leave as it is')
+    end_date = models.DateField(blank=True, null=True, help_text='If currently working leave as it is')
     url = models.URLField(blank=True, null=True)
     description = models.TextField(blank=True)
     currently_working = models.BooleanField()
