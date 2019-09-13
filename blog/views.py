@@ -11,6 +11,7 @@ class ArticleListView(generic.ListView):
     queryset = Article.objects.all()
     paginate_by = 10
     context_object_name = 'article_list'
+    ordering = ['publish_on']
 
 
 class ArticleDetailView(generic.DetailView):
@@ -18,4 +19,3 @@ class ArticleDetailView(generic.DetailView):
     template_name = 'blog/article.html'
     context_object_name = 'article'
     queryset = Article.objects.all()
-
