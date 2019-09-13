@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from info.mixins import PTagWrapMixin
+from blog.mixins import CropShrinkImageMixin
 COUNTRY_CODES = [
     ('+91', 'INDIA')
 ]
@@ -42,7 +43,7 @@ class Experience(models.Model):
         return "{}@{}".format(self.designation, self.company)
 
 
-class Client(models.Model):
+class Client(CropShrinkImageMixin, models.Model):
     profile = models.ForeignKey(Profile, related_name='clients', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     designation = models.CharField(max_length=50)
@@ -52,6 +53,11 @@ class Client(models.Model):
 
     class Meta:
         verbose_name_plural = 'Clients'
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.shrink_image('image', (90, 90))
+        super().save()
 
     def __str__(self):
         return f'{self.profile}_{self.name}'
