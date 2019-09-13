@@ -8,7 +8,7 @@ class CropShrinkImageMixin:
         img: Image = Image.open(getattr(self, field_name))
         img.thumbnail(self.get_shrinked_size(field_name, resize_shape), Image.ANTIALIAS)
         image_file = BytesIO()
-        img.save(image_file, 'jpg')
+        img.save(image_file, 'png')
         getattr(self, field_name).file = image_file
 
     def get_shrinked_size(self, field_name, resize_shape):
