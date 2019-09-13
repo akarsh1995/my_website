@@ -30,6 +30,7 @@ class Project(PTagWrapMixin, models.Model):
 
     class Meta:
         verbose_name_plural = 'Projects'
+        ordering = ['-end_date']
 
     def get_absolute_url(self):
         return reverse('project-details-url', kwargs={'slug': self.slug})

@@ -38,6 +38,7 @@ class Experience(models.Model):
 
     class Meta:
         verbose_name_plural = 'Experiences'
+        ordering = ['-from_date']
 
     def __str__(self):
         return "{}@{}".format(self.designation, self.company)

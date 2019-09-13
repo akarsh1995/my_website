@@ -6,7 +6,6 @@ class ProjectListView(generic.ListView):
     model = Project
     context_object_name = 'projects'
     template_name = 'projects/projects.html'
-    ordering = ['-end_date']
 
     def get_context_data(self, *, object_list=None, **kwargs):
         ctx = super().get_context_data()

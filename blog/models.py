@@ -69,3 +69,6 @@ class Article(PTagWrapMixin, CropShrinkImageMixin, models.Model):
 
     def get_absolute_url(self):
         return reverse('single_article_url', kwargs={'slug': self.slug})
+
+    class Meta:
+        ordering = ['-publish_on']
