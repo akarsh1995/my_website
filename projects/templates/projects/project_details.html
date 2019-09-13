@@ -30,7 +30,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="philophy_text">
                         <h2><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h2>
-                        <strong>{{ project.start_date|date:"M' y" }} - {{ project.end_date|date:"M' y" }}</strong>
+                        <strong>{{ project.start_date|date:"M' y" }} - {% if project.end_date %}{{ project.end_date|date:"M' y" }}{% else %}Current{% endif %}</strong>
                         <div style="text-align: justify">{{ project.description|safe }}</div>
                         <ul>
                             {% if project.url %}
