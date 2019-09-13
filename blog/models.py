@@ -48,15 +48,20 @@ class Article(PTagWrapMixin, CropShrinkImageMixin, models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        # crop image
         self.crop_image('background_image', (750, 375))
+
+        # wrap new line with p tag
         self.wrap_description_p_tag('content')
-        if not self.slug:
+
+        # set slug
+        if not self.slug or len(self.slug) > 38:
             self.slug = slugify(self.title)
-        self.slug = self.slug[:38] if len(self.slug) > 38 else self.slug
-        if len(self.content) > 140:
-            self.short_description = self.content[:140] + '...'
-        else:
-            self.short_description = self.content + "..."
+            self.slug = self.slug[:38] if len(self.slug) > 38 else self.slug
+
+        # set short description
+        if self.content:
+            self.short_description = self.content if len(self.content) < 140 else self.content[:140] + '...'
         super(Article, self).save()
 
     def __str__(self):

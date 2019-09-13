@@ -20,7 +20,7 @@ class Project(PTagWrapMixin, models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.wrap_description_p_tag('description')
-        if not self.slug:
+        if not self.slug or len(self.slug) > 100:
             self.slug = slugify(self.title)
             if len(self.slug) > 100:
                 self.slug = self.slug[:100]
