@@ -1,10 +1,12 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+from info.mixins import PTagWrapMixin
 
-class Project(models.Model):
+
+class Project(PTagWrapMixin, models.Model):
     creator = models.ForeignKey(User, related_name='projects', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
     start_date = models.DateField(blank=True)
@@ -17,10 +19,7 @@ class Project(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.description:
-            text_p_wrapped = [f'<p>{line.strip()}</p>' if line and not line.startswith('<p>') else line
-                              for line in self.description.split('\n')]
-            self.description = ''.join(text_p_wrapped)
+        self.wrap_description_p_tag('description')
         if not self.slug:
             self.slug = slugify(self.title)
             if len(self.slug) > 100:

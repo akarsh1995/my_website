@@ -1,6 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
-
+from django.db import models
+from info.mixins import PTagWrapMixin
 COUNTRY_CODES = [
     ('+91', 'INDIA')
 ]
@@ -57,7 +57,7 @@ class Client(models.Model):
         return f'{self.profile}_{self.name}'
 
 
-class Philosophy(models.Model):
+class Philosophy(PTagWrapMixin, models.Model):
     profile = models.OneToOneField(Profile, related_name='philosophy', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=True)
     description = models.TextField(blank=True)
@@ -68,9 +68,7 @@ class Philosophy(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.description:
-            text_p_wrapped = [f'<p>{line.strip()}</p>' for line in self.description.split('\n') if line]
-            self.description = ''.join(text_p_wrapped)
+        self.wrap_description_p_tag('description')
         super(Philosophy, self).save()
 
     class Meta:
