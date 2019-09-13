@@ -24,13 +24,16 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="section_tittle">
-                        <p>My projects</p>
-                        <h2>Take a look around some of my awesome works</h2>
+                    {% if projects %}
+                        <h2>Take a look around some of my {% if category %}{{ category }}{% else %}awesome{% endif %} works</h2>
+                        {% else %}
+                        <h2>Sorry no projects available for category {% if category %}{{ category }}{% endif %}.</h2>
+                    {% endif %}
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="section_btn text-right">
-                        <a href="#" class="btn_2">More works</a>
+                        <a href="{% url 'projects-url' %}" class="btn_2">More works</a>
                     </div>
                 </div>
             </div>
@@ -41,35 +44,22 @@
                             <div class="grid-sizer"></div>
                             {% if projects %}
                                 {% for project in projects %}
-                                    {% if forloop.counter|divisibleby:2 %}
-                                        <a href="{{ project.get_absolute_url }}"
-                                           class="grid-item big_height big_weight">
-                                            <img src="
-                                                    {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
-                                                 alt="">
-                                            <div class="portfolio_hover_text">
-                                                <i>{{ project.title }}</i>
-                                            </div>
-                                        </a>
-                                    {% elif forloop.counter|divisibleby:4 %}
-                                        <a href="{{ project.get_absolute_url }}" class="grid-item big_weight">
-                                            <img src="
-                                                    {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
-                                                 alt="">
-                                            <div class="portfolio_hover_text">
-                                                <i>{{ project.title }}</i>
-                                            </div>
-                                        </a>
-                                    {% else %}
-                                        <a href="{{ project.get_absolute_url }}" class="grid-item">
-                                            <img src="
-                                                    {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
-                                                 alt="">
-                                            <div class="portfolio_hover_text">
-                                                <i>{{ project.title }}</i>
-                                            </div>
-                                        </a>
-                                    {% endif %}
+                                    {% if forloop.counter0|divisibleby:3 %}
+                                        <div class="row">{% endif %}
+
+                                <a href="{{ project.get_absolute_url }}" target="_blank">
+
+                                    <div class="col-md-4 grid-item">
+                                        <img src="
+
+                                                {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
+                                             alt="">
+                                        <div class="portfolio_hover_text">
+                                            <i>{{ project.title }}</i>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% if forloop.counter|divisibleby:3 %}</div>{% endif %}
                                 {% endfor %}
                             {% endif %}
                         </div>
