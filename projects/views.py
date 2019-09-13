@@ -6,6 +6,7 @@ class ProjectListView(generic.ListView):
     model = Project
     context_object_name = 'projects'
     template_name = 'projects/projects.html'
+    ordering = ['end_date']
 
 
 class ProjectDetailView(generic.DetailView):
