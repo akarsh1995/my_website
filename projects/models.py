@@ -18,10 +18,13 @@ class Project(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         if self.description:
-            text_p_wrapped = [f'<p>{line.strip()}</p>' for line in self.description.split('\n') if line and not line.startswith('<')]
+            text_p_wrapped = [f'<p>{line.strip()}</p>' if line and not line.startswith('<p>') else line
+                              for line in self.description.split('\n')]
             self.description = ''.join(text_p_wrapped)
         if not self.slug:
             self.slug = slugify(self.title)
+            if len(self.slug) > 100:
+                self.slug = self.slug[:100]
         super(Project, self).save()
 
     class Meta:
