@@ -39,32 +39,39 @@
                     <div class="mesonary_part">
                         <div class="grid">
                             <div class="grid-sizer"></div>
-                        {% if projects %}
-                            {% for project in projects %}
-                                {% if forloop.counter|divisibleby:2 %}
-                                    <a href="{{ project.get_absolute_url }}" class="grid-item big_height big_weight">
-                                        <img src="{{ project.display_image.url }}" alt="">
-                                        <div class="portfolio_hover_text">
-                                            <i>{{ project.title }}</i>
-                                        </div>
-                                    </a>
-                                {% elif forloop.counter|divisibleby:4 %}
-                                    <a href="{{ project.get_absolute_url }}" class="grid-item big_weight">
-                                        <img src="{{ project.display_image.url }}" alt="">
-                                        <div class="portfolio_hover_text">
-                                            <i>{{ project.title }}</i>
-                                        </div>
-                                    </a>
-                                {% else %}
-                                    <a href="{{ project.get_absolute_url }}" class="grid-item">
-                                        <img src="{{ project.display_image.url }}" alt="">
-                                        <div class="portfolio_hover_text">
-                                            <i>{{ project.title }}</i>
-                                        </div>
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                            {% if projects %}
+                                {% for project in projects %}
+                                    {% if forloop.counter|divisibleby:2 %}
+                                        <a href="{{ project.get_absolute_url }}"
+                                           class="grid-item big_height big_weight">
+                                            <img src="
+                                                    {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
+                                                 alt="">
+                                            <div class="portfolio_hover_text">
+                                                <i>{{ project.title }}</i>
+                                            </div>
+                                        </a>
+                                    {% elif forloop.counter|divisibleby:4 %}
+                                        <a href="{{ project.get_absolute_url }}" class="grid-item big_weight">
+                                            <img src="
+                                                    {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
+                                                 alt="">
+                                            <div class="portfolio_hover_text">
+                                                <i>{{ project.title }}</i>
+                                            </div>
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ project.get_absolute_url }}" class="grid-item">
+                                            <img src="
+                                                    {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
+                                                 alt="">
+                                            <div class="portfolio_hover_text">
+                                                <i>{{ project.title }}</i>
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
