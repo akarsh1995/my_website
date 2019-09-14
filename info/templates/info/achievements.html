@@ -1,0 +1,38 @@
+{% extends 'info/header_footer.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Achievements</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="portfolio_part section_padding">
+        <div class="container">
+            <div class="row">
+                {% if achievements_list %}
+                    {% for ach in achievements_list %}
+                        <div class="col-md-4 grid-item">
+                            {% if ach.document %}<img src="{{ ach.document.url }}" alt="">{% endif %}
+                            <div class="portfolio_hover_text">
+                                <i>{{ ach.title }}</i></div>
+                        </div>
+
+                        {% if forloop.counter|divisibleby:3 %}
+                            </div>
+                            <div class="row">
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </div>
+        </div>
+    </section>
+{% endblock content %}

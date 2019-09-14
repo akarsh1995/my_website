@@ -42,3 +42,11 @@ class GetInTouchAdmin(ImportExportModelAdmin):
 
 
 admin.site.register(models.GetInTouch, GetInTouchAdmin)
+
+
+class AchievementAdmin(ImportExportModelAdmin):
+    class Meta:
+        model = models.Achievement
+
+
+admin.site.register(models.Achievement, AchievementAdmin)

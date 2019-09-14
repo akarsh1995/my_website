@@ -1,7 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
 from django.db import models
-from info.mixins import PTagWrapMixin
 from blog.mixins import CropShrinkImageMixin
+from info.mixins import PTagWrapMixin
+
 COUNTRY_CODES = [
     ('+91', 'INDIA')
 ]
@@ -90,3 +93,19 @@ class GetInTouch(models.Model):
 
     def __str__(self):
         return f'Message from {self.email}'
+
+
+class Achievement(models.Model):
+    title = models.CharField(max_length=100)
+    date = models.DateField(blank=True, null=True)
+    profile = models.ForeignKey(Profile, related_name='achievements', blank=True, null=True,
+                                on_delete=models.CASCADE)
+    document = models.FileField(storage=FileSystemStorage(location=settings.MEDIA_ROOT), blank=True, null=True,
+                                upload_to='achievements/%Y',
+                                default='settings.MEDIA_ROOT/defaults/default_achievements.jpg')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-date']
