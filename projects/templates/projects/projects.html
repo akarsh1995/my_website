@@ -3,6 +3,10 @@
 
 
 {% block header_content %}
+    <title>{{ profile.user.first_name }}'s {% if category %}{{ category }} - {% endif %}Projects</title>
+    <meta name="description" content="Browse various projects from the accomplished Projects.">
+    <meta name="keywords" content="Machine Learning, Deep Learning, Natural Language Processing.">
+    <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
     <style>
         .btn:focus, .btn:active, button:focus, button:active {
             outline: none !important;
@@ -66,8 +70,10 @@
                     {% if projects %}
                         {% for project in projects %}
                             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a class="thumbnail" href="" data-image-id="" data-toggle="modal" data-title="{{ project.title }}"
+                                <a class="thumbnail" href="" data-image-id="" data-toggle="modal"
+                                   data-title="{{ project.title }}"
                                    data-image="
+
 
 
 
@@ -78,8 +84,10 @@
 
 
 
+
                                                  {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
-                                         alt="{{ project.title }}" style="width: 300px; height: 300px; object-fit: cover">
+                                         alt="{{ project.title }}"
+                                         style="width: 300px; height: 300px; object-fit: cover">
                                 </a>
                                 <div style="text-align: center; margin: 0 auto; padding-top: 10px">
                                     <a href="{{ project.get_absolute_url }}">
@@ -92,7 +100,8 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div style="padding-top: 100px" class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                <div style="padding-top: 100px" class="modal fade" id="image-gallery" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">

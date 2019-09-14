@@ -2,7 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from info.mixins import PTagWrapMixin
+
+from info.mixins import PTagWrapMixin, KeywordExtractorMixin, clean_html
 from .mixins import CropShrinkImageMixin
 
 
@@ -26,7 +27,7 @@ class Tag(models.Model):
         return self.name
 
 
-class Article(PTagWrapMixin, CropShrinkImageMixin, models.Model):
+class Article(KeywordExtractorMixin, PTagWrapMixin, CropShrinkImageMixin, models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=64, unique=True)
@@ -38,6 +39,7 @@ class Article(PTagWrapMixin, CropShrinkImageMixin, models.Model):
     updated_on = models.DateField(auto_now=True)
     created_on = models.DateField(auto_now_add=True)
     publish_on = models.DateField()
+    keywords = models.TextField(blank=True, null=True)
     list_display = ('title', 'category', 'tags', 'author', 'publish_on', 'created_on', 'updated_on')
     search_fields = ['title', 'byline', 'symbol']
     list_filter = ['publish_on', 'created_on']
@@ -61,7 +63,13 @@ class Article(PTagWrapMixin, CropShrinkImageMixin, models.Model):
 
         # set short description
         if self.content:
-            self.short_description = self.content if len(self.content) < 140 else self.content[:140] + '...'
+            self.short_description = (clean_html(self.content) if len(self.content) < 140
+                                      else clean_html(self.content[:140]) + '...')
+
+        # set keywords
+        if not self.keywords:
+            self.keywords = self.get_keywords('content')
+
         super(Article, self).save()
 
     def __str__(self):

@@ -2,12 +2,15 @@
 {% load static %}
 
 {% block header_content %}
-        <title>{{ article.title }}</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="Free Web tutorials">
-        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-        <meta name="author" content="John Doe">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+    <meta name="description" content="{{ article.short_description }}">
+    <meta name="keywords" content="{{ article.keywords }}">
+    <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
+    <meta property="og:title" content="{{ article.title }}"/>
+    <meta property="og:type" content="Article"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    {% if article.background_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.background_image.url|safe }}"/>{% endif %}
+
 {% endblock %}
 
 {% block content %}

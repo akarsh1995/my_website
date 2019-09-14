@@ -1,6 +1,12 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% block header_content %}
+    <title>{{ profile.user.first_name }}'s {% if category %}{{ category }} - {% endif %}Blog</title>
+    <meta name="description" content="Get to know the author reading articles.">
+    <meta name="keywords" content="Machine Learning, Deep Learning, Natural Language Processing, personal info.">
+    <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
+{% endblock %}
 {% block content %}
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">

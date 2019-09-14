@@ -1,6 +1,17 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% block header_content %}
+    <title>{{ project.title }}</title>
+    <meta name="description" content="{{ project.meta_description }}">
+    <meta name="keywords" content="{{ project.keywords }}">
+    <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
+    <meta property="og:title" content="{{ project.title }}" />
+    <meta property="og:type" content="Project" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    {% if project.display_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ project.display_image.url|safe }}"/>{% endif %}
+{% endblock %}
+
 {% block content %}
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -24,13 +35,16 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-5 col-md-6">
                     <div class="philophy_img">
-                        <img src="{% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}" alt="#">
+                        <img src="{% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
+                             alt="#">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="philophy_text">
                         <h2><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h2>
-                        <strong>{{ project.start_date|date:"M' y" }} - {% if project.end_date %}{{ project.end_date|date:"M' y" }}{% else %}Current{% endif %}</strong>
+                        <strong>{{ project.start_date|date:"M' y" }} -
+                            {% if project.end_date %}{{ project.end_date|date:"M' y" }}{% else %}
+                                Current{% endif %}</strong>
                         <div style="text-align: justify">{{ project.description|safe }}</div>
                         <ul>
                             {% if project.url %}
@@ -39,9 +53,10 @@
                             {% endif %}
                             {% if project.contributors.all %}
                                 <li>Contributors:
-                                {% for contributor in project.contributors.all %}
-                                    {{ contributor.name }} <a href="{{ contributor.linkedin }}"><i class="fab fa-linkedin"></i></a>
-                                {% endfor %}
+                                    {% for contributor in project.contributors.all %}
+                                        {{ contributor.name }}
+                                        <a href="{{ contributor.linkedin }}"><i class="fab fa-linkedin"></i></a>
+                                    {% endfor %}
                                 </li>
                             {% endif %}
                             {#                            <li><a href="#">Flat illustration</a></li>#}

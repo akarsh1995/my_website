@@ -2,12 +2,8 @@
 {% load static %}
 
 {% block header_content %}
-    <title>Home Page</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="Free Web tutorials">
-    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-    <meta name="author" content="John Doe">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.user.first_name }} {{ profile.user.last_name }}</title>
+    <meta name="keywords" content="Machine Learning, Data Science, Natural Language Processing">
 {% endblock %}
 
 {% block content %}
