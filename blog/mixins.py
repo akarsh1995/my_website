@@ -18,7 +18,13 @@ class CropShrinkImageMixin:
 
     def crop_image(self, field_name, resize_shape):
         img: Image = Image.open(getattr(self, field_name))
-        img = img.crop((0, 0, resize_shape[0], resize_shape[1]))
+        new_width = resize_shape[0]
+        new_height = resize_shape[1]
+        left = (img.width - new_width) / 2
+        top = (img.height - new_height) / 2
+        right = (img.width + new_width) / 2
+        bottom = (img.height + new_height) / 2
+        img = img.crop((left, top, right, bottom))
         image_file = BytesIO()
         img.save(image_file, format='png')
         getattr(self, field_name).file = image_file
