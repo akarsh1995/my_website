@@ -100,9 +100,8 @@ class Achievement(models.Model):
     date = models.DateField(blank=True, null=True)
     profile = models.ForeignKey(Profile, related_name='achievements', blank=True, null=True,
                                 on_delete=models.CASCADE)
-    document = models.FileField(storage=FileSystemStorage(location=settings.MEDIA_ROOT), blank=True, null=True,
-                                upload_to='achievements/%Y',
-                                default='settings.MEDIA_ROOT/defaults/default_achievements.jpg')
+    document = models.FileField(blank=True, null=True,
+                                upload_to='achievements/%Y')
 
     def __str__(self):
         return self.title
