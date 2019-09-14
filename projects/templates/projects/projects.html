@@ -66,7 +66,7 @@
                     {% if projects %}
                         {% for project in projects %}
                             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a class="thumbnail" href="" data-image-id="" data-toggle="modal" data-title=""
+                                <a class="thumbnail" href="" data-image-id="" data-toggle="modal" data-title="{{ project.title }}"
                                    data-image="
 
 
@@ -81,10 +81,10 @@
                                                  {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
                                          alt="{{ project.title }}" style="width: 300px; height: 300px; object-fit: cover">
                                 </a>
-                                <div style="padding-left: 60px; padding-top: 10px">
+                                <div style="text-align: center; margin: 0 auto; padding-top: 10px">
                                     <a href="{{ project.get_absolute_url }}">
                                             <span class="btn btn" style="color: rgb(12, 18, 87)"><i
-                                                    class="fa fa-book"></i> See Project
+                                                    class="fa fa-book"></i> See Project Details
                                             </span>
                                     </a>
                                 </div>
@@ -92,7 +92,7 @@
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                <div style="padding-top: 100px" class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
