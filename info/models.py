@@ -1,6 +1,4 @@
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
 from django.db import models
 from blog.mixins import CropShrinkImageMixin
 from info.mixins import PTagWrapMixin
