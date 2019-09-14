@@ -2,6 +2,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.views import generic
 from info.forms import GetInTouchForm
+from info.models import Achievement
 # Create your views here.
 
 
@@ -26,3 +27,10 @@ class GetInTouchFormView(SuccessMessageMixin, generic.FormView):
         form.send_email_recipient()
         form.send_email_self()
         return super().form_valid(form)
+
+
+class AchievementsView(generic.ListView):
+    template_name = 'info/achievements.html'
+    model = Achievement
+    paginate_by = 10
+    context_object_name = 'achievements_list'
