@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-
 from info.mixins import PTagWrapMixin
 from blog.models import Category
 
@@ -17,7 +16,7 @@ class Project(PTagWrapMixin, models.Model):
     description = models.TextField(blank=True)
     currently_working = models.BooleanField()
     slug = models.CharField(max_length=100, blank=True)
-    display_image = models.ImageField(blank=True, upload_to='projects/')
+    display_image = models.ImageField(blank=True, null=True, upload_to='projects/')
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
