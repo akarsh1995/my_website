@@ -46,8 +46,12 @@
                                    data-target="#image-gallery">
                                     <img class="img-thumbnail"
                                          src="{% if ach.document %}{{ ach.document.url }}{% endif %}"
-                                         alt="Another alt text">
+                                         alt="{{ ach.title }}">
                                 </a>
+                            <div style="padding-left: 60px; padding-top: 10px">
+                                <a href="{{ ach.document.url }}"><button><i class="fa fa-certificate" aria-hidden="true"></i> View Certificate</button></a>
+                            </div>
+
                             </div>
                         {% endfor %}
                     {% endif %}

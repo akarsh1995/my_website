@@ -66,6 +66,9 @@
                     {% if projects %}
                         {% for project in projects %}
                             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                            <div style="text-align: center; margin: 0 auto; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                <h4>{{ project.title }}</h4>
+                            </div>
                                 <a class="thumbnail" href="" data-image-id="" data-toggle="modal" data-title=""
                                    data-image="
 
@@ -79,9 +82,9 @@
 
 
                                                  {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
-                                         alt="Another alt text" style="width: 300px; height: 300px; object-fit: cover">
+                                         alt="{{ project.title }}" style="width: 300px; height: 300px; object-fit: cover">
                                 </a>
-                                <div>
+                                <div style="padding-left: 60px; padding-top: 10px">
                                     <a href="{{ project.get_absolute_url }}">
                                             <span class="btn btn" style="color: rgb(12, 18, 87)"><i
                                                     class="fa fa-book"></i> See Project
