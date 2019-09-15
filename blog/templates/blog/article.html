@@ -1,7 +1,11 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% load i18n %}
+
 {% block header_content %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
     <title>{{ article.title }}</title>
     <meta name="description" content="{{ article.short_description }}">
     <meta name="keywords" content="{{ article.keywords }}">

@@ -1,9 +1,17 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% load i18n %}
+
 {% block header_content %}
-        <title>{{ profile.user.first_name }}'s Achievements</title>
-        <meta name="keywords" content="Machine Learning, Data Science, Natural Language Processing">
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+    <title>{{ profile.user.first_name }}'s Achievements</title>
+    <meta name="keywords" content="Machine Learning, Data Science, Natural Language Processing">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta name="description"
+          content="Browse various {{ profile.user.first_name }}'s achievements. Certificates, Competitions, Hackathons etc.">
+
     <style>
         .btn:focus, .btn:active, button:focus, button:active {
             outline: none !important;
@@ -43,22 +51,27 @@
                     {% if achievements_list %}
                         {% for ach in achievements_list %}
                             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="{{ ach.title }}"
+                                <a class="thumbnail" href="#" data-image-id="" data-toggle="modal"
+                                   data-title="{{ ach.title }}"
                                    data-image="{% if ach.document %}{{ ach.document.url }}{% endif %}"
                                    data-target="#image-gallery">
                                     <img class="img-thumbnail"
                                          src="{% if ach.document %}{{ ach.document.url }}{% endif %}"
                                          alt="{{ ach.title }}">
                                 </a>
-                            <div style="text-align: center; margin: 0 auto; padding-top: 10px">
-                                <a href="{{ ach.document.url }}"><button><i class="fa fa-certificate" aria-hidden="true"></i> View Certificate</button></a>
-                            </div>
+                                <div style="text-align: center; margin: 0 auto; padding-top: 10px">
+                                    <a href="{{ ach.document.url }}">
+                                        <button><i class="fa fa-certificate" aria-hidden="true"></i> View Certificate
+                                        </button>
+                                    </a>
+                                </div>
 
                             </div>
                         {% endfor %}
                     {% endif %}
                 </div>
-                <div style="padding-top: 100px" class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                <div style="padding-top: 100px" class="modal fade" id="image-gallery" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">

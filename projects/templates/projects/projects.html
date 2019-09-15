@@ -2,11 +2,18 @@
 {% load static %}
 
 
+{% load i18n %}
+
 {% block header_content %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
     <title>{{ profile.user.first_name }}'s {% if category %}{{ category }} - {% endif %}Projects</title>
     <meta name="description" content="Browse various projects from the accomplished Projects.">
     <meta name="keywords" content="Machine Learning, Deep Learning, Natural Language Processing.">
     <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
+    <meta property="og:site_name" content="{{ profile.user.first_name }} {{ profile.user.last_name }} projects.">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
     <style>
         .btn:focus, .btn:active, button:focus, button:active {
             outline: none !important;
@@ -77,10 +84,12 @@
 
 
 
+
                                            {% if project.display_image %}{{ project.display_image.url|safe }}{% endif %}"
                                    data-target="#image-gallery">
                                     <img class="img-thumbnail"
                                          src="
+
 
 
 

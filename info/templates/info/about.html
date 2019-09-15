@@ -1,10 +1,18 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% load i18n %}
+
 {% block header_content %}
-    <title>About Page</title>
-    <meta name="description" content="Get to know more about {{ profile.user.first_name }} {{ profile.user.last_name }}">
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+    <title>About - {{ profile.user.first_name }} {{ profile.user.last_name }}</title>
+    <meta name="description"
+          content="Get to know more about {{ profile.user.first_name }} {{ profile.user.last_name }}. Let's solve the AI problem together.">
     <meta name="keywords" content="Machine Learning, Data Science, Natural Language Processing">
+    <meta property="og:type" content="About | {{ profile.user.first_name }} {{ profile.user.last_name }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
 {% endblock %}
 
 

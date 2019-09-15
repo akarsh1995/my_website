@@ -1,11 +1,17 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% load i18n %}
+
 {% block header_content %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
     <title>{{ profile.user.first_name }}'s {% if category %}{{ category }} - {% endif %}Blog</title>
-    <meta name="description" content="Get to know the author reading articles.">
+    <meta name="description" content="Get to know the author {{ profile.user.first_name }} reading articles.">
     <meta name="keywords" content="Machine Learning, Deep Learning, Natural Language Processing, personal info.">
     <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
 {% endblock %}
 {% block content %}
     <!-- breadcrumb start-->
@@ -33,27 +39,27 @@
                     <div class="blog_left_sidebar">
                         {% for article in article_list %}
 
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ article.background_image.url }}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>{{ article.publish_on.day|stringformat:"02d" }}</h3>
-                                    <p>{{ article.publish_on|date:"M" }}</p>
-                                </a>
-                            </div>
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" src="{{ article.background_image.url }}" alt="">
+                                    <a href="#" class="blog_item_date">
+                                        <h3>{{ article.publish_on.day|stringformat:"02d" }}</h3>
+                                        <p>{{ article.publish_on|date:"M" }}</p>
+                                    </a>
+                                </div>
 
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="{{ article.get_absolute_url }}">
-                                    <h2>{{ article.title | safe }}</h2>
-                                </a>
-                                <p>{{ article.short_description | safe }}</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="far fa-user"></i> {{ article.tags.name }}</a></li>
-{#                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>#}
-                                </ul>
-                            </div>
-                        </article>
-{% endfor %}
+                                <div class="blog_details">
+                                    <a class="d-inline-block" href="{{ article.get_absolute_url }}">
+                                        <h2>{{ article.title | safe }}</h2>
+                                    </a>
+                                    <p>{{ article.short_description | safe }}</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="#"><i class="far fa-user"></i> {{ article.tags.name }}</a></li>
+                                        {#                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>#}
+                                    </ul>
+                                </div>
+                            </article>
+                        {% endfor %}
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -138,45 +144,45 @@
                             </ul>
                         </aside>
 
-{#                        <aside class="single_sidebar_widget popular_post_widget">#}
-{#                            <h3 class="widget_title">Recent Post</h3>#}
-{#                            <div class="media post_item">#}
-{#                                <img src="{% static 'img/post/post_1.png' %}" alt="post">#}
-{#                                <div class="media-body">#}
-{#                                    <a href="{% url 'single_article_url' %}">#}
-{#                                        <h3>From life was you fish...</h3>#}
-{#                                    </a>#}
-{#                                    <p>January 12, 2019</p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="media post_item">#}
-{#                                <img src="{% static 'img/post/post_2.png' %}" alt="post">#}
-{#                                <div class="media-body">#}
-{#                                    <a href="{% url 'single_article_url' %}">#}
-{#                                        <h3>The Amazing Hubble</h3>#}
-{#                                    </a>#}
-{#                                    <p>02 Hours ago</p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="media post_item">#}
-{#                                <img src="{% static 'img/post/post_3.png' %}" alt="post">#}
-{#                                <div class="media-body">#}
-{#                                    <a href="{% url 'single_article_url' %}">#}
-{#                                        <h3>Astronomy Or Astrology</h3>#}
-{#                                    </a>#}
-{#                                    <p>03 Hours ago</p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="media post_item">#}
-{#                                <img src="{% static 'img/post/post_4.png' %}" alt="post">#}
-{#                                <div class="media-body">#}
-{#                                    <a href="{% url 'single_article_url' %}">#}
-{#                                        <h3>Asteroids telescope</h3>#}
-{#                                    </a>#}
-{#                                    <p>01 Hours ago</p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </aside>#}
+                        {#                        <aside class="single_sidebar_widget popular_post_widget">#}
+                        {#                            <h3 class="widget_title">Recent Post</h3>#}
+                        {#                            <div class="media post_item">#}
+                        {#                                <img src="{% static 'img/post/post_1.png' %}" alt="post">#}
+                        {#                                <div class="media-body">#}
+                        {#                                    <a href="{% url 'single_article_url' %}">#}
+                        {#                                        <h3>From life was you fish...</h3>#}
+                        {#                                    </a>#}
+                        {#                                    <p>January 12, 2019</p>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="media post_item">#}
+                        {#                                <img src="{% static 'img/post/post_2.png' %}" alt="post">#}
+                        {#                                <div class="media-body">#}
+                        {#                                    <a href="{% url 'single_article_url' %}">#}
+                        {#                                        <h3>The Amazing Hubble</h3>#}
+                        {#                                    </a>#}
+                        {#                                    <p>02 Hours ago</p>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="media post_item">#}
+                        {#                                <img src="{% static 'img/post/post_3.png' %}" alt="post">#}
+                        {#                                <div class="media-body">#}
+                        {#                                    <a href="{% url 'single_article_url' %}">#}
+                        {#                                        <h3>Astronomy Or Astrology</h3>#}
+                        {#                                    </a>#}
+                        {#                                    <p>03 Hours ago</p>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="media post_item">#}
+                        {#                                <img src="{% static 'img/post/post_4.png' %}" alt="post">#}
+                        {#                                <div class="media-body">#}
+                        {#                                    <a href="{% url 'single_article_url' %}">#}
+                        {#                                        <h3>Asteroids telescope</h3>#}
+                        {#                                    </a>#}
+                        {#                                    <p>01 Hours ago</p>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </aside>#}
                         <aside class="single_sidebar_widget tag_cloud_widget">
                             <h4 class="widget_title">Tag Clouds</h4>
                             <ul class="list">

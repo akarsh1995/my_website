@@ -1,15 +1,21 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block header_content %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
     <title>{{ project.title }}</title>
     <meta name="description" content="{{ project.meta_description }}">
     <meta name="keywords" content="{{ project.keywords }}">
     <meta name="author" content="{{ profile.user.first_name }} {{ profile.user.last_name }}">
-    <meta property="og:title" content="{{ project.title }}" />
-    <meta property="og:type" content="Project" />
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-    {% if project.display_image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ project.display_image.url|safe }}"/>{% endif %}
+    <meta property="og:title" content="{{ project.title }}">
+    <meta property="og:type" content="Project">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+    {% if project.display_image %}
+        <meta property="og:image"
+              content="{{ request.scheme }}://{{ request.get_host }}{{ project.display_image.url|safe }}">{% endif %}
 {% endblock %}
 
 {% block content %}

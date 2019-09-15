@@ -1,9 +1,18 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% load i18n %}
+
 {% block header_content %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
     <title>{{ profile.user.first_name }} {{ profile.user.last_name }}</title>
     <meta name="keywords" content="Machine Learning, Data Science, Natural Language Processing">
+    <meta property="og:type" content="website {{ profile.user.first_name }} {{ profile.user.last_name }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+
+    <meta name="description"
+          content="Discuss your machine learning knowledge with me. Solve the AI problems together with {{ profile.user.first_name }}">
 {% endblock %}
 
 {% block content %}
@@ -60,7 +69,8 @@
                             <span><i class="fas fa-tv"></i></span>
                             <h2>Recommender Systems</h2>
                             <p>Check my projects associated with Recommender Systems.</p>
-                            <a href="{% url 'projects-url' %}?category=Recommender Systems" class="learn_btn">See Projects</a>
+                            <a href="{% url 'projects-url' %}?category=Recommender Systems" class="learn_btn">See
+                                Projects</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +80,8 @@
                             <span><i class="fas fa-cogs"></i></span>
                             <h2>Machine Learning</h2>
                             <p>Check my projects associated with Machine Learning.</p>
-                            <a href="{% url 'projects-url' %}?category=Machine Learning" class="learn_btn">See Projects</a>
+                            <a href="{% url 'projects-url' %}?category=Machine Learning" class="learn_btn">See
+                                Projects</a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +113,8 @@
                                         <div class="client_review_img">
                                             <img src="{{ client.image.url }}" alt="#">
                                             <h4>{{ client.name }}</h4>
-                                            <p>{{ client.designation }} <a href="{{ client.linkedin }}"><i class="fab fa-linkedin"></i></a></p>
+                                            <p>{{ client.designation }} <a href="{{ client.linkedin }}"><i
+                                                    class="fab fa-linkedin"></i></a></p>
                                         </div>
                                     </div>
                                 </div>

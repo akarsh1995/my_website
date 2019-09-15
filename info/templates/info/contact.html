@@ -1,9 +1,17 @@
 {% extends 'info/header_footer.html' %}
 {% load static %}
 
+{% load i18n %}
+
 {% block header_content %}
-    <title>Contact</title>
+    {% get_current_language as LANGUAGE_CODE %}
+    <title>Contact - {{ profile.user.first_name }} {{ profile.user.last_name }}</title>
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+    <meta property="og:site_name" content="Andrew Ng">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
     <meta name="keywords" content="Machine Learning, Data Science, Natural Language Processing">
+    <meta name="description"
+          content="Contact {{ profile.user.first_name }} {{ profile.user.last_name }} to get your Machine Learning, Natural Language Processing, Deep Learning, Shallow Learning tasks done.">
 {% endblock %}
 
 {% block content %}
@@ -24,109 +32,118 @@
     </section>
     <!-- breadcrumb start-->
 
-  <!-- ================ contact section start ================= -->
-  <section class="contact-section section_padding">
-    <div class="container">
-        <hr>
-      <div style="text-align: center">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23812.214105665757!2d77.6208362416191!3d12.896653986383091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae14eec814197d%3A0xcf0ad378f26271e9!2sBommanahalli%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1567774687952!5m2!1sen!2sin" width="100%" height="450px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-      </div>
-        <hr>
-      <div class="row">
-        <div class="col-12">
-          <h2 class="contact-title">Get in Touch</h2>
-        </div>
-        <div class="col-lg-8">
-        {% if messages %}
-            <div>
-            <ul class="messages">
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
-
-          <form class="form-contact contact_form" action="{% url 'contact_url' %}" method="post" id="contactForm"
-                novalidate="novalidate">{% csrf_token %}
-              {% if form.errors %}
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+    <!-- ================ contact section start ================= -->
+    <section class="contact-section section_padding">
+        <div class="container">
+            <hr>
+            <div style="text-align: center">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23812.214105665757!2d77.6208362416191!3d12.896653986383091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae14eec814197d%3A0xcf0ad378f26271e9!2sBommanahalli%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1567774687952!5m2!1sen!2sin"
+                        width="100%" height="450px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+            <hr>
             <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <textarea class="form-control w-100" name="{{ form.message.name }}" id="{{ form.message.id_for_label }}" cols="30" rows="9"
-                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"
-                    placeholder='Enter Message'></textarea>
+                <div class="col-12">
+                    <h2 class="contact-title">Get in Touch</h2>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" type="text" onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Enter your name'" placeholder='Enter your name'>
+                <div class="col-lg-8">
+                    {% if messages %}
+                        <div>
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <form class="form-contact contact_form" action="{% url 'contact_url' %}" method="post"
+                          id="contactForm"
+                          novalidate="novalidate">{% csrf_token %}
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                  <textarea class="form-control w-100" name="{{ form.message.name }}"
+                            id="{{ form.message.id_for_label }}" cols="30" rows="9"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'"
+                            placeholder='Enter Message'></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="{{ form.name.name }}"
+                                           id="{{ form.name.id_for_label }}" type="text" onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Enter your name'" placeholder='Enter your name'>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="{{ form.email.name }}"
+                                           id="{{ form.email.id_for_label }}" type="email"
+                                           onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Enter email address'"
+                                           placeholder='Enter email address'>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="{{ form.subject.name }}"
+                                           id="{{ form.subject.id_for_label }}" type="text"
+                                           onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Enter Subject'" placeholder='Enter Subject'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="button button-contactForm btn_4">Send Message</button>
+                        </div>
+                    </form>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" type="email" onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Enter email address'" placeholder='Enter email address'>
+                <div class="col-lg-4">
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-home"></i></span>
+                        <div class="media-body">
+                            <h3>{{ profile.city }}.</h3>
+                            <p>{{ profile.street }}</p>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                        <div class="media-body">
+                            <h3>{{ profile.phone }}</h3>
+                            <p>{{ profile.phone_timings }}</p>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-email"></i></span>
+                        <div class="media-body">
+                            <h3>{{ profile.user.email }}</h3>
+                            <p>{{ profile.email_timings }}</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="{{ form.subject.name }}" id="{{ form.subject.id_for_label }}" type="text" onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Enter Subject'" placeholder='Enter Subject'>
-                </div>
-              </div>
             </div>
-            <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_4">Send Message</button>
-            </div>
-          </form>
         </div>
-        <div class="col-lg-4">
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-home"></i></span>
-            <div class="media-body">
-              <h3>{{ profile.city }}.</h3>
-              <p>{{ profile.street }}</p>
-            </div>
-          </div>
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-            <div class="media-body">
-              <h3>{{ profile.phone }}</h3>
-              <p>{{ profile.phone_timings }}</p>
-            </div>
-          </div>
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-email"></i></span>
-            <div class="media-body">
-              <h3>{{ profile.user.email }}</h3>
-              <p>{{ profile.email_timings }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- ================ contact section end ================= -->
+    </section>
+    <!-- ================ contact section end ================= -->
 
 {% endblock %}
 
 {% block footer_content %}
-{#    <script src="{% static 'js/contact.js' %}"></script>#}
+    {#    <script src="{% static 'js/contact.js' %}"></script>#}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxchimp/1.3.0/jquery.ajaxchimp.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
