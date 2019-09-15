@@ -15,7 +15,7 @@
 
     {% if project.display_image %}
         <meta property="og:image"
-              content="{{ request.scheme }}://{{ request.get_host }}{{ project.display_image.url|safe }}">{% endif %}
+              content="{{ project.display_image.url|safe }}">{% endif %}
 {% endblock %}
 
 {% block content %}
