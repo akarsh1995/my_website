@@ -24,7 +24,7 @@
                 <div class="col-lg-7">
                     <div class="banner_text">
                         <div class="banner_text_iner">
-                            <h5>Hi there, This is {{ profile.user.first_name }}</h5>
+                            <h5>Hi there, This is {{ profile.user.first_name }} {{ profile.user.last_name }}</h5>
                             <h1>Data Scientist</h1>
                             <div class="banner_btn">
                                 <a href="{% url 'contact_url' %}" class="btn_1">Contact me</a>
