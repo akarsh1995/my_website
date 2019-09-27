@@ -1,5 +1,4 @@
 amqp==2.5.1
-awscli==1.16.238
 backports.csv==1.0.7
 billiard==3.6.1.0
 boto3==1.9.225
