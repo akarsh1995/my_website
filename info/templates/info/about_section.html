@@ -18,8 +18,7 @@
                             {% for experience in profile.experiences.all %}
                                 <div class="single_experiance_list">
                                     <h5>{{ experience.designation }}</h5>
-                                    <p>at {{ experience.company }} from {{ experience.from_date |date:"M' y" }}
-                                        to {{ experience.to_date| date:"M' y" }}</p>
+                                    <p>at {{ experience.company }} from {{ experience.from_date |date:"M' y" }} to {% if experience.to_date %}{{ experience.to_date| date:"M' y" }}{% else %}Present{% endif %}</p>
                                 </div>
                             {% endfor %}
                         </div>

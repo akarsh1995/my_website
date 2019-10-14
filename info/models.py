@@ -34,7 +34,7 @@ class Experience(models.Model):
                                 related_name='experiences', on_delete=models.CASCADE)
     designation = models.CharField(max_length=100)
     from_date = models.DateField()
-    to_date = models.DateField()
+    to_date = models.DateField(blank=True, null=True)
     company = models.CharField(max_length=50)
 
     class Meta:
